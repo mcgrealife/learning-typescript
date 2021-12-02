@@ -120,3 +120,123 @@ console.log(addNum(1,2))
 function log(message: string | number): void {
     console.log(message)
 }
+
+// Interfaces - like a custom type. or specific structure ot object or function. similar delcaration to types
+// Interfaces do not use the assignment operator `=`
+// Interfaces can have optional and readonly properties
+interface animal {
+    breed: string,
+    readonly happy: boolean,
+    age?: number
+}
+
+const wipple: animal = {
+    breed: 'tuxedo',
+    happy: true
+}
+
+// so what is the difference between interface and type then?
+// Type can be used with primitives and unions, interfaces cannot.
+
+type Life = string | number
+const meaningOf: Life = '42'
+
+// in general, if using objects, most people choose interfaces
+
+
+// Can use interfaces with functions
+interface MathFunc {
+    (x: number, y: number): number
+}
+
+// now both of these can use the same interface (similar to swift protocols?)
+const add: MathFunc = (x: number, y: number): number => x + y
+const sub: MathFunc = (x: number, y: number): number => x - y
+
+// Classes (which were introduced to JS in ES6). used to create multiple objects. They have constructors (similar to swift init)
+// private means it can only be access by the class
+// protected means it can be accessed in this class or any sub class 
+class Person {
+    id: number
+    protected name: string
+
+    constructor(id: number, name: string) {
+        this.id = id
+        this.name = name
+        console.log(this)
+    }
+
+    anotherMethod() {
+        return `hi from a method inside ${this.name}`
+    }
+}
+
+// to instantiate a new object from a class, use the `new` keyword
+const michael = new Person(1, 'michael')
+const madison = new Person(2, 'madison')
+
+console.log(michael, madison)
+
+// without access modifers (aka data modifers), objects properties are public and can be changed
+michael.id = 5
+
+console.log(michael.anotherMethod())
+
+
+// can also implement an interface to this class. woah.
+interface AnimalInterface {
+    id: number
+    name: string
+    favoriteSound(): string
+}
+
+
+class Animal implements AnimalInterface {
+    id: number
+    name: string
+    favoriteSound(): string {
+        return "meowww"
+    }
+
+    constructor(id: number, name: string) {
+        this.id = id
+        this.name = name
+    }
+    
+}
+
+const wopple: Animal = {
+    id: 33,
+    name: "wopple",
+    favoriteSound(): string {
+        return "moooow"
+    }
+}
+
+
+// can also extend classes. 
+// It's annoying we have to re-write the constructor for all other parameters too though. 
+// well super() slightly solves this, but still annoying to define the parameters
+class Dog extends Animal {
+    species: string   
+
+    favoriteSound(): string {
+        return "bork"
+    }
+
+ constructor(id: number, name: string, species: string) {
+    super(id, name)
+    this.species = species
+ }
+}
+
+const oliver = new Dog(3, 'Oliver', 'Dog')
+
+console.log(oliver.favoriteSound)
+
+// can the `favoriteSound()` method defined in the superclass reference the objects class? 
+// Ie. if dog, then "bark", else "meow"
+// oh I an override the method when defining the dog class. 
+// But I'd rather have a condition in the base class.
+// well I guess this would be more related to subclasses than extending classes, so maybe not relevant to this section.
+
