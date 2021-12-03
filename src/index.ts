@@ -214,9 +214,10 @@ const wopple: Animal = {
 }
 
 
-// can also extend classes. 
+// can also extend classes. OH this is called a Subclass, even though it's extending. 
 // It's annoying we have to re-write the constructor for all other parameters too though. 
 // well super() slightly solves this, but still annoying to define the parameters
+
 class Dog extends Animal {
     species: string   
 
@@ -234,9 +235,23 @@ const oliver = new Dog(3, 'Oliver', 'Dog')
 
 console.log(oliver.favoriteSound)
 
-// can the `favoriteSound()` method defined in the superclass reference the objects class? 
-// Ie. if dog, then "bark", else "meow"
-// oh I an override the method when defining the dog class. 
-// But I'd rather have a condition in the base class.
-// well I guess this would be more related to subclasses than extending classes, so maybe not relevant to this section.
+// generics (to build reusuable flexible components)
+function getArray(items: any[]): any[] {
+    return new Array().concat(items)
+}
+
+// now use this function to create an array of numbers and an array of strings
+
+
+let arrayNum = getArray([1,2,3])
+
+let arrayStr = getArray(['flexible','generic','elegance'])
+
+function printGenericArray(arrayOfArrays: any[]): void {
+    
+    arrayOfArrays.forEach(array => {
+        console.log(array)
+    });
+}
+printGenericArray([arrayNum,arrayStr])
 
