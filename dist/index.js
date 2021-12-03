@@ -130,7 +130,7 @@ const wopple = {
 };
 // can also extend classes. OH this is called a Subclass, even though it's extending. 
 // It's annoying we have to re-write the constructor for all other parameters too though. 
-// well super() slightly solves this, but still annoying to define the parameters
+// well super() slightly solves this, but still annoying to re-define the parameters
 class Dog extends Animal {
     constructor(id, name, species) {
         super(id, name);
@@ -168,3 +168,7 @@ let strArray = getGenericArray(['flexible', 'generic', 'elegance', 'and safer th
 // so now it's not possible to push a str to the numArray
 numArray.push(23); // but numbers are allowed
 strArray.push('string'); // str only accepts strings
+// HOW to use with other tooling
+// remember, tools such as next.js support typescript out-of-the-box, but others will need to be configured.
+// some have templates like `npx create-react-app . --template typescript`
+// here is how with svelte https://svelte.dev/blog/svelte-and-typescript
