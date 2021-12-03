@@ -235,17 +235,19 @@ const oliver = new Dog(3, 'Oliver', 'Dog')
 
 console.log(oliver.favoriteSound)
 
-// generics (to build reusuable flexible components)
+// use any (to build reusuable flexible components)
 function getArray(items: any[]): any[] {
     return new Array().concat(items)
 }
 
 // now use this function to create an array of numbers and an array of strings
 
-
 let arrayNum = getArray([1,2,3])
+// but since, any – 
+arrayNum.push('3')
 
-let arrayStr = getArray(['flexible','generic','elegance'])
+let arrayStr = getArray(['flexible','any','but'])
+arrayStr.push('not as safe as generics')
 
 function printGenericArray(arrayOfArrays: any[]): void {
     
@@ -255,3 +257,17 @@ function printGenericArray(arrayOfArrays: any[]): void {
 }
 printGenericArray([arrayNum,arrayStr])
 
+
+// using generics, (basically type placeholder)
+
+function getGenericArray<T>(items: T[]): T[] {
+    return new Array().concat(items)
+}
+
+// when calling the funciton, it's basically like passing an argument for the type. 
+let numArray = getGenericArray<number>([1,2,3,4])
+let strArray = getGenericArray<string>(['flexible', 'generic','elegance','and safer than any'])
+
+// so now it's not possible to push a str to the numArray
+numArray.push(23) // but numbers are allowed
+strArray.push('string') // str only accepts strings

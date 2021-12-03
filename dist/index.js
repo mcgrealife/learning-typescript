@@ -142,16 +142,29 @@ class Dog extends Animal {
 }
 const oliver = new Dog(3, 'Oliver', 'Dog');
 console.log(oliver.favoriteSound);
-// generics (to build reusuable flexible components)
+// use any (to build reusuable flexible components)
 function getArray(items) {
     return new Array().concat(items);
 }
 // now use this function to create an array of numbers and an array of strings
 let arrayNum = getArray([1, 2, 3]);
-let arrayStr = getArray(['flexible', 'generic', 'elegance']);
+// but since, any – 
+arrayNum.push('3');
+let arrayStr = getArray(['flexible', 'any', 'but']);
+arrayStr.push('not as safe as generics');
 function printGenericArray(arrayOfArrays) {
     arrayOfArrays.forEach(array => {
         console.log(array);
     });
 }
 printGenericArray([arrayNum, arrayStr]);
+// using generics, (basically type placeholder)
+function getGenericArray(items) {
+    return new Array().concat(items);
+}
+// when calling the funciton, it's basically like passing an argument for the type. 
+let numArray = getGenericArray([1, 2, 3, 4]);
+let strArray = getGenericArray(['flexible', 'generic', 'elegance', 'and safer than any']);
+// so now it's not possible to push a str to the numArray
+numArray.push(23); // but numbers are allowed
+strArray.push('string'); // str only accepts strings
